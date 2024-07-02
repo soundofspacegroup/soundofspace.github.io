@@ -1,26 +1,77 @@
 <!DOCTYPE html>
-<html>
-<title>Sound Of Space</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="w3-ekm.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-<style>
-body {
-      background-color: #000000;
-}
-body,h1,h5 {font-family: "Raleway", sans-serif}
-body, html {height: 100%}
-.bgimg {
-  background-image: url(BACKGROUND2.jpg);
-  min-height: 100%;
-  background-position: center;
-  background-size: cover;
-}
-</style>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sound Of Space</title>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      font-family: "Raleway", sans-serif;
+    }
+
+    .bgimg {
+      background-image: url('BACKGROUND2.jpg');
+      min-height: 100%;
+      background-position: center;
+      background-size: cover;
+      position: relative;
+      color: white;
+    }
+
+    .w3-display-topright {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+
+    .w3-button {
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+
+    .w3-modal-content {
+      max-width: 600px;
+      margin: auto;
+      background-color: #fefefe;
+/*      border: 1px solid #888;*/
+      position: relative;
+      text-align: center;
+    }
+
+    .w3-modal-content .w3-button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: black; /* Black background for close button */
+      color: white;
+      border: none;
+      font-size: 20px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+
+    .w3-container {
+      margin-top: 20px;
+    }
+
+    .w3-modal-content .w3-container {
+      margin-top: 0;
+    }
+
+    .w3-black-band {
+      background-color: #000;
+      color: white;
+      padding: 10px;
+    }
+  </style>
+</head>
 <body>
 
-<div class="bgimg w3-display-container w3-text-white">
+<div class="bgimg w3-display-container">
   <div class="w3-display-middle w3-xxxlarge">
     <p><b>|SOUND OF SPACE|</b></p>
   </div>
@@ -37,35 +88,26 @@ body, html {height: 100%}
 </div>
 
 <!-- Order Modal -->
-<div id="order" class="w3-modal">
-  <div class="w3-modal-content w3-animate-zoom">
-    <div class="w3-container w3-black w3-display-container">
-      <span onclick="document.getElementById('order').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
-
+<div id="order" class="w3-modal" onclick="this.style.display='none'">
+  <div class="w3-modal-content">
+    <span class="w3-button w3-display-topright" onclick="document.getElementById('order').style.display='none'">&times;</span>
+    <div class="w3-black-band">
       <h1>ORDER</h1>
     </div>
-    <div class="w3-container"> 
-      <h5>   </h5>
-    </div>
     <div class="w3-container">
-      <h5> </h5>
       <h3><b>THE ROUTLEDGE COMPANION TO THE SOUND OF SPACE</b></h3>
       <p>Available for pre-order on November 8, 2024. Item will ship after November 29, 2024</p>
-      <h5><a href="https://www.routledge.com/The-Routledge-Companion-to-the-Sound-of-Space/Matthews-Burry-Burry/p/book/9781032388540" target="_blank">LINK</a></h5>
+      <p><a href="https://www.routledge.com/The-Routledge-Companion-to-the-Sound-of-Space/Matthews-Burry-Burry/p/book/9781032388540" target="_blank">LINK</a></p>
     </div>
   </div>
 </div>
 
 <!-- Menu Modal -->
-<div id="menu" class="w3-modal">
-  <div class="w3-modal-content w3-animate-zoom">
-    <div class="w3-container w3-black w3-display-container">
-      <span onclick="document.getElementById('menu').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
-
+<div id="menu" class="w3-modal" onclick="this.style.display='none'">
+  <div class="w3-modal-content">
+    <span class="w3-button w3-display-topright" onclick="document.getElementById('menu').style.display='none'">&times;</span>
+    <div class="w3-black-band">
       <h1>UPCOMING EVENTS</h1>
-    </div>
-    <div class="w3-container"> 
-      <h5>   </h5>
     </div>
     <div class="w3-container">
       <h3><b>BOOK LAUNCH</b></h3>
@@ -73,13 +115,11 @@ body, html {height: 100%}
       <p>Check back for details in August 2024</p>
       <h5>TBC</h5>
     </div>
-
-    <div class="w3-container w3-black">
+    <div class="w3-black-band">
       <h1>PAST EVENTS</h1>
     </div>
-
     <div class="w3-container">
-      <h3><b> SOUND OF SPACE SYMPOSIUM </b></h3>
+      <h3><b>SOUND OF SPACE SYMPOSIUM</b></h3>
       <p><i>2 Day International Symposium</i></p>
       <h5>DECEMBER 11TH AND 12TH, 2019 at HERE EAST, LONDON</h5>
       <p>At this symposium we discuss the challenges, creative opportunities and technical considerations when working with extreme and highly particular spatial conditions, across the related disciplines of architecture, engineering, music composition and performance. The symposium includes talks, presentations, performances and demonstrations from a wide range of academics and industry professionals.</p>
@@ -89,73 +129,62 @@ body, html {height: 100%}
 </div>
 
 <!-- Contact Modal -->
-<div id="contact" class="w3-modal">
-  <div class="w3-modal-content w3-animate-zoom">
-    <div class="w3-container w3-black">
-      <span onclick="document.getElementById('contact').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
-      <h1><b>CONTACT</b></h1>
+<div id="contact" class="w3-modal" onclick="this.style.display='none'">
+  <div class="w3-modal-content">
+    <span class="w3-button w3-display-topright" onclick="document.getElementById('contact').style.display='none'">&times;</span>
+    <div class="w3-black-band">
+      <h1>CONTACT</h1>
     </div>
     <div class="w3-container">
       <h3><b>CONTACT US:</b></h3>
       <p><a href="mailto:soundofspacegroup@gmail.com?subject=Hello">Email</a></p>
-      <h5>   </h5>
-      <h3><b>FOLLOW US:</h3></b></p>
-      <p><a href="https://www.instagram.com/soundspacegroup/" target="_blank">Instagram</a> </p>
-      <p><a href="https://x.com/soundspacegroup" target="_blank">Twitter</a> </p>
-      <p><a href="https://www.facebook.com/soundspacegroup" target="_blank">Facebook</a> </p>
+      <h3><b>FOLLOW US:</b></h3>
+      <p><a href="https://www.instagram.com/soundspacegroup/" target="_blank">Instagram</a></p>
+      <p><a href="https://x.com/soundspacegroup" target="_blank">Twitter</a></p>
+      <p><a href="https://www.facebook.com/soundspacegroup" target="_blank">Facebook</a></p>
     </div>
   </div>
 </div>
 
 <!-- Info Modal -->
-<div id="info" class="w3-modal">
-  <div class="w3-modal-content w3-animate-zoom">
-    <div class="w3-container w3-black">
-      <span onclick="document.getElementById('info').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
+<div id="info" class="w3-modal" onclick="this.style.display='none'">
+  <div class="w3-modal-content">
+    <span class="w3-button w3-display-topright" onclick="document.getElementById('info').style.display='none'">&times;</span>
+    <div class="w3-black-band">
       <h1>INFO</h1>
     </div>
     <div class="w3-container">
       <h3><b>|SOUND OF SPACE|</b></h3>
       <p>is an initiative led by Composer/Architect <a href="https://www.ekm.works/" target="_blank">Emma-Kate Matthews</a>, Architect <a href="https://www.adelaide.edu.au/directory/jane.burry" target="_blank">Prof. Jane Burry</a>, and Architect <a href="https://mcburry.net/" target="_blank">Mark Burry</a></p>
-
       <p>Our aim is to convene a diverse group of researchers and practitioners who think about and engage with architecture and space through sound. We draw upon expertise both from within and beyond the field of architecture, inviting speakers with various academic, professional and practice backgrounds, including musicology, anthropology, computing, engineering, mathematics, performance studies, planning, and acoustics.</p>
-
       <p>Details of our upcoming seminars and events can be found on our events tab.</p>
     </div>
   </div>
 </div>
 
+<!-- JavaScript for modals -->
 <script>
-var modalA = document.getElementById('menu');
-var modalB = document.getElementById('contact');
-var modalC = document.getElementById('info');
-var modalD = document.getElementById('order');
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modalA) {
-        modalA.style.display = "none";
-    } 
-  if(event.target == modalB) {
-        modalB.style.display = "none";      
-     }
-  if(event.target == modalC) {
-        modalC.style.display = "none";      
-     }
-  if (event.target == modalD) {
-        modalD.style.display = "none";
-    }     
-}
-
-// Function to close modal with Escape key
-document.addEventListener('keydown', function(event) {
-  if (event.key === 'Escape') {
-    if (modalA.style.display === "block") modalA.style.display = "none";
-    if (modalB.style.display === "block") modalB.style.display = "none";
-    if (modalC.style.display === "block") modalC.style.display = "none";
-    if (modalD.style.display === "block") modalD.style.display = "none";
+  // Close modals when clicking outside of them
+  window.onclick = function(event) {
+    var modals = document.getElementsByClassName('w3-modal');
+    for (var i = 0; i < modals.length; i++) {
+      if (event.target == modals[i]) {
+        modals[i].style.display = "none";
+      }
+    }
   }
-});
+
+  // Close modals with Escape key
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+      var modals = document.getElementsByClassName('w3-modal');
+      for (var i = 0; i < modals.length; i++) {
+        if (modals[i].style.display === "block") {
+          modals[i].style.display = "none";
+        }
+      }
+    }
+  });
 </script>
 
 </body>
