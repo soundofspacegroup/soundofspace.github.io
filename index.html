@@ -20,6 +20,7 @@
       background-size: cover;
       position: relative;
       color: white;
+      z-index: 1; /* Ensure background image stays behind modals */
     }
 
     .w3-display-topright {
@@ -40,6 +41,7 @@
 /*      border: 1px solid #888;*/
       position: relative;
       text-align: center;
+      z-index: 2; /* Ensure modals appear above background */
     }
 
     .w3-modal-content .w3-button {
