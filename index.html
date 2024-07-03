@@ -38,17 +38,17 @@
       max-width: 600px;
       margin: auto;
       background-color: #fefefe;
-/*      border: 1px solid #888;*/
       position: relative;
       text-align: center;
       z-index: 2; /* Ensure modals appear above background */
+      padding: 0;
     }
 
     .w3-modal-content .w3-button {
       position: absolute;
       top: 10px;
       right: 10px;
-      background-color: transparent; /* Transparent background for close button */
+      background-color: black;
       color: white;
       border: none;
       font-size: 20px;
@@ -57,11 +57,7 @@
     }
 
     .w3-container {
-      margin-top: 20px;
-    }
-
-    .w3-modal-content .w3-container {
-      margin-top: 0;
+      padding: 20px;
     }
 
     .w3-black-band {
@@ -90,7 +86,7 @@
 </div>
 
 <!-- Order Modal -->
-<div id="order" class="w3-modal" onclick="this.style.display='none'">
+<div id="order" class="w3-modal">
   <div class="w3-modal-content">
     <span class="w3-button w3-display-topright" onclick="document.getElementById('order').style.display='none'">&times;</span>
     <div class="w3-black-band">
@@ -105,7 +101,7 @@
 </div>
 
 <!-- Menu Modal -->
-<div id="menu" class="w3-modal" onclick="this.style.display='none'">
+<div id="menu" class="w3-modal">
   <div class="w3-modal-content">
     <span class="w3-button w3-display-topright" onclick="document.getElementById('menu').style.display='none'">&times;</span>
     <div class="w3-black-band">
@@ -131,7 +127,7 @@
 </div>
 
 <!-- Contact Modal -->
-<div id="contact" class="w3-modal" onclick="this.style.display='none'">
+<div id="contact" class="w3-modal">
   <div class="w3-modal-content">
     <span class="w3-button w3-display-topright" onclick="document.getElementById('contact').style.display='none'">&times;</span>
     <div class="w3-black-band">
@@ -149,7 +145,7 @@
 </div>
 
 <!-- Info Modal -->
-<div id="info" class="w3-modal" onclick="this.style.display='none'">
+<div id="info" class="w3-modal">
   <div class="w3-modal-content">
     <span class="w3-button w3-display-topright" onclick="document.getElementById('info').style.display='none'">&times;</span>
     <div class="w3-black-band">
