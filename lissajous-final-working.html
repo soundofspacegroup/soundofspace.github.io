@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Lissajous Curve with Audio Input</title>
+    <style>
+        body { margin: 0; }
+        canvas { display: block; }
+        button {
+            position: absolute;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        #startButton {
+            top: 20px;
+            left: 20px;
+        }
+        #viewControls {
+            top: 60px;
+            left: 20px;
+        }
+        .control {
+            position: absolute;
+            left: 20px;
+        }
+        #xPhaseShift {
+            top: 100px;
+        }
+        #yPhaseShift {
+            top: 140px;
+        }
+        #zPhaseShift {
+            top: 180px;
+        }
+        #amplitudeControl {
+            top: 220px;
+        }
+    </style>
+</head>
+<body>
+    <button id="startButton">Start Audio</button>
+    <button id="viewControls">Switch View</button>
+    
+    <div class="control" id="xPhaseShift">
+        <label for="xPhase">X Phase Shift:</label>
+        <input type="range" id="xPhase" min="0" max="6.28" step="0.01" value="3.14">
+    </div>
+    <div class="control" id="yPhaseShift">
+        <label for="yPhase">Y Phase Shift:</label>
+        <input type="range" id="yPhase" min="0" max="6.28" step="0.01" value="3.14">
+    </div>
+    <div class="control" id="zPhaseShift">
+        <label for="zPhase">Z Phase Shift:</label>
+        <input type="range" id="zPhase" min="0" max="6.28" step="0.01" value="3.14">
+    </div>
+    <div class="control" id="amplitudeControl">
+        <label for="amplitude">Amplitude:</label>
+        <input type="range" id="amplitude" min="1" max="10" step="0.1" value="3">
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script>
+        // Set up the scene, camera, and renderer
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        // Initialize OrbitControls
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.25;
+        controls.enableZoom = true;
+
+        // Set initial camera position
+        camera.position.z = 10;
+
+        // Create Lissajous curve geometry and material
+        const curvePoints = [];
+        const curveGeometry = new THREE.BufferGeometry();
+        const curveMaterial = new THREE.LineBasicMaterial({ color: 0x00FFFF });
+        const lissajousCurve = new THREE.Line(curveGeometry, curveMaterial);
+        scene.add(lissajousCurve);
+
+        // Audio context setup
+        let audioContext, analyser, dataArray;
+
+        document.getElementById('startButton').addEventListener('click', async () => {
+            if (!audioContext) {
+                try {
+                    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    const source = audioContext.createMediaStreamSource(stream);
+                    analyser = audioContext.createAnalyser();
+                    analyser.fftSize = 64;
+                    dataArray = new Uint8Array(analyser.frequencyBinCount);
+                    source.connect(analyser);
+                    animate();
+                } catch (err) {
+                    console.error('Error initializing audio:', err);
+                }
+            } else {
+                if (audioContext.state === 'suspended') {
+                    await audioContext.resume();
+                }
+            }
+        });
+
+        function generateLissajousCurve(freqX, freqY, freqZ, phaseX, phaseY, phaseZ, amplitude) {
+            const points = [];
+            for (let i = 0; i <= 1000; i++) {
+                const t = i / 1000 * Math.PI * 2;
+                const x = Math.sin(freqX * t + phaseX) * amplitude;
+                const y = Math.sin(freqY * t + phaseY) * amplitude;
+                const z = Math.sin(freqZ * t + phaseZ) * amplitude;
+                points.push(new THREE.Vector3(x, y, z));
+            }
+            curveGeometry.setFromPoints(points);
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            if (analyser) {
+                analyser.getByteFrequencyData(dataArray);
+                const freqX = (dataArray[10] / 255) * 20 + 1;
+                const freqY = (dataArray[20] / 255) * 20 + 1;
+                const freqZ = (dataArray[30] / 255) * 20 + 1;
+
+                const phaseX = parseFloat(document.getElementById('xPhase').value);
+                const phaseY = parseFloat(document.getElementById('yPhase').value);
+                const phaseZ = parseFloat(document.getElementById('zPhase').value);
+
+                const amplitude = parseFloat(document.getElementById('amplitude').value);
+
+                generateLissajousCurve(freqX, freqY, freqZ, phaseX, phaseY, phaseZ, amplitude);
+            }
+
+            controls.update(); 
+            renderer.render(scene, camera);
+        }
+
+        let currentView = 'perspective';
+
+        document.getElementById('viewControls').addEventListener('click', () => {
+            switch (currentView) {
+                case 'perspective':
+                    camera.position.set(0, 10, 0);
+                    camera.lookAt(0, 0, 0);
+                    currentView = 'top';
+                    break;
+                case 'top':
+                    camera.position.set(10, 0, 0);
+                    camera.lookAt(0, 0, 0);
+                    currentView = 'side';
+                    break;
+                case 'side':
+                    camera.position.set(0, 0, 10);
+                    camera.lookAt(0, 0, 0);
+                    currentView = 'front';
+                    break;
+                case 'front':
+                    camera.position.set(0, 0, 10);
+                    camera.lookAt(0, 0, 0);
+                    currentView = 'perspective';
+                    break;
+            }
+            controls.update();
+        });
+
+        window.addEventListener('resize', () => {
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+        });
+    </script>
+</body>
+</html>
