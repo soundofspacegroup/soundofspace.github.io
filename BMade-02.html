@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EK BMade Test Page</title>
+    <style>
+        .image-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .popup {
+            display: none;
+            position: absolute;
+            top: 120px; /* Adjust to position the popup to the bottom right corner of the hover area */
+            left: 120px; /* Adjust to position the popup to the bottom right corner of the hover area */
+            width: 300px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            padding: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .popup .close-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .popup h2 {
+            font-family: Arial, sans-serif;
+            font-size: 12px, bold;
+            color: #333;
+            margin-top: 0;
+        }
+
+        .popup p {
+            font-family: Arial, sans-serif;
+            font-size: 9px;
+            color: #555;
+            margin: 10px 0 0;
+        }
+
+        .hover-area {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100px;
+            height: 100px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 50%;
+            border: 2px solid red;
+            transform: translate(-50%, -50%);
+        }
+
+        .hover-area:hover + .popup,
+        .popup:hover {
+            display: block;
+        }
+
+        .hover-area:hover + .popup {
+            top: calc(50% + 50px); /* 50% of hover-area height + some offset */
+            left: calc(50% + 50px); /* 50% of hover-area width + some offset */
+        }
+    </style>
+</head>
+<body>
+    <div class="image-container">
+        <img src="22GS.jpg" alt="22GordonStreetPlan" width="100%">
+        <div class="hover-area"></div>
+        <div class="popup">
+            <span class="close-btn" onclick="this.parentElement.style.display='none'">&times;</span>
+            <h2>Popup Heading</h2>
+            <p>Some process that happens here</p>
+            <p>Or could even be the name of someone who has specialist knowledge in this area of the workshop / associated tools and processes if want to make it less 'menu' like. Also this graphic style could be wayyy nicer, but just to quickly demonstrate the principle...</p>
+        </div>
+    </div>
+</body>
+</html>
